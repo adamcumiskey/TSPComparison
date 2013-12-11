@@ -6,6 +6,8 @@
 // Waypoint.java
 // Object representing a point in cartesian space
 
+import java.util.Random;
+
 public class Waypoint
 {
 	private int x, y;
@@ -29,5 +31,14 @@ public class Waypoint
 	public int getY()
 	{
 		return y;	
+	}
+	
+	public static Waypoint randomWaypoint()
+	{
+		Random generator = new Random();
+		int randX = generator.nextInt() % 100;
+		int randY = generator.nextInt() % 100;
+
+		return new Waypoint(randX, randY);
 	}
 }

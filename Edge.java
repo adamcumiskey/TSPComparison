@@ -17,6 +17,16 @@ public class Edge implements Comparable<Edge>
 		this.end = end;
 		setLength();
 	}
+
+	public Waypoint start()
+	{
+		return start;
+	}
+
+	public Waypoint end()
+	{
+		return end;
+	}
 	
 	public int compareTo(Edge otherEdge)
 	{

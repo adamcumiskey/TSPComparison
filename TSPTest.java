@@ -11,7 +11,8 @@ public class TSPTest
 	public static void main(String[] args)
 	{
 		Route route = new Route(10);
-		route.print();
-		System.out.println("Route length = " + route.getLength());
+	
+		Greedy2OptTSP greedy2Opt = new Greedy2OptTSP();
+		greedy2Opt.test(route);
 	}
 }
