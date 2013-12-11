@@ -35,21 +35,27 @@ public class Route
 		return length;
 	}
 
-	// Return an array of sorted edges 
-	public static ArrayList<Edge> generateEdges(Route route, int startIdx)
+	// Recursively presort the route in acending order based on edge length
+	public void presort(int startIdx)
 	{
-		ArrayList<Edge> edges = new ArrayList<Edge>(route.getWaypointCount()/2);
-
-		for (int i = startIdx+1; i < route.getWaypointCount()-1; ++i)
+		// End condition is when we reach the second to last waypoint.
+		// We don't want to optimize the last edge because the final stop
+		// needs to remain consistent.
+		if (startIdx == route.size()-2)
+			return;
+		else 
 		{
-			Waypoint start = route.waypointAtIndex(i);
-			Waypoint end = route.waypointAtIndex(i+1);
-			Edge edge = new Edge(start, end);
-			edges.add(edge);
+			// Sort the edges and grab the shortest one
+			ArrayList<Edge> edges = generateEdges(startIdx); 
+			Edge shortestEdge = edges.get(0);
+
+			// Get the endex of the end of the waypoint and swap the edges
+			int index = route.indexOf(shortestEdge.end());
+			swapIndexes(startIdx+1, index);
+			
+			// Recurse
+			presort(startIdx+1);
 		}
-		
-		Collections.sort(edges);
-		return edges;
 	}
 	
 	public void swapIndexes(int idxA, int idxB)
@@ -79,4 +85,21 @@ public class Route
 			route.get(i).print();
 		}
 	}	
+
+	// Return an array of sorted edges 
+	private ArrayList<Edge> generateEdges(int startIdx)
+	{
+		ArrayList<Edge> edges = new ArrayList<Edge>(route.size()/2);
+
+		for (int i = startIdx+1; i < route.size()-1; ++i)
+		{
+			Waypoint start = route.get(i);
+			Waypoint end = route.get(i+1);
+			Edge edge = new Edge(start, end);
+			edges.add(edge);
+		}
+		
+		Collections.sort(edges);
+		return edges;
+	}
 }

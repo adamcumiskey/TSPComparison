@@ -6,43 +6,30 @@
 // Greedy2OptTSP.java
 // Implimentation of the greedy 2-opt TSP solve
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class Greedy2OptTSP
 {
 	public void test(Route route)
 	{
-		System.out.println("Initial Length: " + route.getLength());
+		System.out.println();
+		System.out.println("======================================");
+		System.out.println("        Greedy 2-opt test");
+		System.out.println("======================================");
 
-		// Start the presorting at index 2
-		route = presort(route, 2);
+		float initialLength = route.getLength();
+
+		// Time the execution of the algorithm
+		long startTime = System.currentTimeMillis();
+		route.presort(0);
 		route = optimize(route);
+		long endTime = System.currentTimeMillis();
+		float runTime = (float)(endTime - startTime)/1000;
+		
+		float finalLength = route.getLength();
 
-		System.out.println("Final Length: " + route.getLength());
-	}
-	
-	// Recursively presort the route in acending order based on edge length
-	private Route presort(Route route, int startIdx)
-	{
-		// End condition is when we reach the second to last waypoint.
-		// We don't want to optimize the last edge because the final stop
-		// needs to remain consistent.
-		if (startIdx == route.getWaypointCount()-2)
-			return route;
-		else 
-		{
-			// Sort the edges and grab the shortest one
-			ArrayList<Edge> edges = Route.generateEdges(route, startIdx); 
-			Edge shortestEdge = edges.get(0);
-
-			// Get the endex of the end of the waypoint and swap the edges
-			int index = route.indexOfWaypoint(shortestEdge.end());
-			route.swapIndexes(startIdx+1, index);
-			
-			// Recurse
-			return presort(route, startIdx+1);
-		}
+		System.out.println("Initial Length: " + initialLength);
+		System.out.println("Final Length: " + finalLength);
+		System.out.println("Time to optimize: " + runTime + "s");
+		System.out.println();
 	}
 
 	private Route optimize(Route route)
@@ -69,4 +56,3 @@ public class Greedy2OptTSP
 		return route;
 	}
 }
-
