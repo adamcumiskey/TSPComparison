@@ -16,12 +16,17 @@ public class Waypoint
 		this.y = y;
 	}
 
-	public void getX()
+	public void print()
+	{
+		System.out.println("(" + x + ", " + y + ")");
+	}
+
+	public int getX()
 	{
 		return x;
 	}
 
-	public void getY()
+	public int getY()
 	{
 		return y;	
 	}

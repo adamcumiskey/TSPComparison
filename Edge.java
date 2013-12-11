@@ -41,6 +41,6 @@ public class Edge implements Comparable<Edge>
 		float delX = end.getX()-start.getX();
 		float delY = end.getY()-start.getY();
 
-		return sqrt(pow(delX, 2) + pow(delY, 2));
+		length = (float)Math.sqrt((float)Math.pow(delX, 2) + (float)Math.pow(delY, 2));
 	}
 }

@@ -6,8 +6,7 @@
 // Greedy2OptTSP.java
 // Implimentation of the greedy 2-opt TSP solve
 
-public class Greedy2OptTSP.java
+public class Greedy2OptTSP
 {
-
 }
 

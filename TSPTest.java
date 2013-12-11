@@ -10,8 +10,8 @@ public class TSPTest
 {
 	public static void main(String[] args)
 	{
-		
-		System.out.println("Main Loop");
-
+		Route route = new Route(10);
+		route.print();
+		System.out.println("Route length = " + route.getLength());
 	}
 }
