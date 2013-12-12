@@ -6,33 +6,14 @@
 // Greedy2OptTSP.java
 // Implimentation of the greedy 2-opt TSP solve
 
-public class Greedy2OptTSP
+public class Greedy2OptTSP extends TSPSolve
 {
-	public void test(Route route)
+	public String name()
 	{
-		System.out.println();
-		System.out.println("======================================");
-		System.out.println("        Greedy 2-opt test");
-		System.out.println("======================================");
-
-		float initialLength = route.getLength();
-
-		// Time the execution of the algorithm
-		long startTime = System.currentTimeMillis();
-		route.presort(0);
-		route = optimize(route);
-		long endTime = System.currentTimeMillis();
-		float runTime = (float)(endTime - startTime)/1000;
-		
-		float finalLength = route.getLength();
-
-		System.out.println("Initial Length: " + initialLength);
-		System.out.println("Final Length: " + finalLength);
-		System.out.println("Time to optimize: " + runTime + "s");
-		System.out.println();
+		return "Greedy 2-Opt";
 	}
 
-	private Route optimize(Route route)
+	public Route optimize(Route route)
 	{
 		float distance = route.getLength();
 

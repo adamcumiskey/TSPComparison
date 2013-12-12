@@ -25,9 +25,35 @@ public class TSPTest
 
 		// Test the greedy2Opt
 		Greedy2OptTSP greedy2Opt = new Greedy2OptTSP();
-		greedy2Opt.test(route);
+
+		test(route, greedy2Opt);
 
 		//System.out.println("New Route");
 		//route.print();
+	}
+
+	private static void test(Route route, TSPSolve algorithm)
+	{
+		System.out.println();
+		System.out.println("======================================");
+		System.out.println("             " + algorithm.name());
+		System.out.println("======================================");
+
+		float initialLength = route.getLength();
+
+		// Time the execution of the algorithm
+		long startTime = System.currentTimeMillis();
+		route.presort(0);
+		route = algorithm.optimize(route);
+		long endTime = System.currentTimeMillis();
+		float runTime = (float)(endTime - startTime)/1000;
+		
+		float finalLength = route.getLength();
+
+		System.out.println("Initial Length: " + initialLength);
+		System.out.println("Final Length: " + finalLength);
+		System.out.println("Time to optimize: " + runTime + "s");
+		System.out.println();
+
 	}
 }
