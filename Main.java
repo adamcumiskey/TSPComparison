@@ -3,14 +3,14 @@
 // Fall '13
 // Final Project
 //
-// TSPTest.java
+// Main.java
 // Main program for testing the TSP solves and outputting the stats
 
 import java.util.Scanner;
 
-public class TSPTest
+public class Main 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws CloneNotSupportedException
 	{
 		// Get the number of waypoints from the user
 		Scanner scanner = new Scanner(System.in);
@@ -19,17 +19,17 @@ public class TSPTest
 
 		// Create the route
 		Route route = new Route(n);
-		//System.out.println("Initial Route");
-		//route.print();
-
-
-		// Test the greedy2Opt
+		Route greedy2OptRoute = new Route(0);
+		Route greedy3OptRoute = new Route(0);
+		greedy2OptRoute.setRoute(route.getRoute());
+		greedy3OptRoute.setRoute(route.getRoute());
+	
+		// Generate the test objects
 		Greedy2OptTSP greedy2Opt = new Greedy2OptTSP();
+		Greedy3OptTSP greedy3Opt = new Greedy3OptTSP();
 
-		test(route, greedy2Opt);
-
-		//System.out.println("New Route");
-		//route.print();
+		test(greedy2OptRoute, greedy2Opt);
+		test(greedy3OptRoute, greedy3Opt);
 	}
 
 	private static void test(Route route, TSPSolve algorithm)

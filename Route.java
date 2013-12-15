@@ -24,6 +24,16 @@ public class Route
 		}
 	}
 
+	public void setRoute(ArrayList<Waypoint> newRoute)
+	{
+		route = newRoute;
+	}
+
+	public ArrayList<Waypoint> getRoute()
+	{
+		return (ArrayList<Waypoint>)route.clone();
+	}
+
 	public float getLength()
 	{
 		float length = 0.0f;

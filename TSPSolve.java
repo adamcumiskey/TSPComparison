@@ -8,6 +8,9 @@
 
 public abstract class TSPSolve
 {
+	// Returns the name of the Algorithm for the output
 	abstract String name();
+
+	// Runs the TSP algorithm and returns the optimized Route
 	abstract Route optimize(Route route);
 }
