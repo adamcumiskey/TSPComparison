@@ -15,14 +15,20 @@ public class Main
 	public static final String LengthImprovementKey = "LengthImprovementKey";
 	public static final String TimeToRunKey = "TimeToRunKey";
 	
-	private static Hashtable test(Route route, TSPSolve algorithm)
+	private static Hashtable test(Route route, TSPSolve algorithm, boolean useImprovement)
 	{
 		float initialLength = route.getLength();
 
 		// Time the execution of the algorithm
 		long startTime = System.currentTimeMillis();
+		
 		route.presort(0);
 		route = algorithm.optimize(route);
+		if (useImprovement == true)
+		{
+			EdgeImprovement.improve(route);	
+		}
+
 		long endTime = System.currentTimeMillis();
 		float runTime = (float)(endTime - startTime)/1000;
 	
@@ -81,9 +87,9 @@ public class Main
 			copy2.setRoute(route.getRoute());
 
 			System.out.println("Starting iteration " + (i+1) + "... ");
-			Hashtable greedy2OptResults = test(copy1, greedy2Opt);
+			Hashtable greedy2OptResults = test(copy1, greedy2Opt, true);
 			System.out.println("\t" + greedy2Opt.name() + " finished");
-			Hashtable greedy3OptResults = test(copy2, greedy3Opt);
+			Hashtable greedy3OptResults = test(copy2, greedy3Opt, true);
 			System.out.println("\t" + greedy3Opt.name() + " finished");
 
 			improv2Opt += (float)greedy2OptResults.get(LengthImprovementKey);

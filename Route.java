@@ -51,6 +51,22 @@ public class Route
 		}
 		return length;
 	}
+	
+	// Return an array of edges 
+	public ArrayList<Edge> generateEdges(int startIdx)
+	{
+		ArrayList<Edge> edges = new ArrayList<Edge>(route.size()/2);
+
+		for (int i = startIdx+1; i < route.size()-1; ++i)
+		{
+			Waypoint start = route.get(i);
+			Waypoint end = route.get(i+1);
+			Edge edge = new Edge(start, end);
+			edges.add(edge);
+		}
+		
+		return edges;
+	}
 
 	// Recursively presort the route in acending order based on edge length
 	public void presort(int startIdx)
@@ -64,6 +80,7 @@ public class Route
 		{
 			// Sort the edges and grab the shortest one
 			ArrayList<Edge> edges = generateEdges(startIdx); 
+			Collections.sort(edges);
 			Edge shortestEdge = edges.get(0);
 
 			// Get the endex of the end of the waypoint and swap the edges
@@ -103,20 +120,4 @@ public class Route
 		}
 	}	
 
-	// Return an array of sorted edges 
-	private ArrayList<Edge> generateEdges(int startIdx)
-	{
-		ArrayList<Edge> edges = new ArrayList<Edge>(route.size()/2);
-
-		for (int i = startIdx+1; i < route.size()-1; ++i)
-		{
-			Waypoint start = route.get(i);
-			Waypoint end = route.get(i+1);
-			Edge edge = new Edge(start, end);
-			edges.add(edge);
-		}
-		
-		Collections.sort(edges);
-		return edges;
-	}
 }

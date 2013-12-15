@@ -54,4 +54,25 @@ public class Edge implements Comparable<Edge>
 		length = (float)Math.sqrt((float)Math.pow(delX, 2) +
 						 (float)Math.pow(delY, 2));
 	}
+
+	// Quick way to determine whether two edges intersect
+	// http://stackoverflow.com/questions/9043805/test-if-two-lines-intersect-javascript-function
+	public boolean isOverlapping(Edge edge)
+	{
+		Waypoint w1 = start; Waypoint w2 = end;
+		Waypoint w3 = edge.start(); Waypoint w4 = edge.end();
+
+		return ((CCW(w1, w3, w4) != CCW(w2, w3, w4)) &&
+					  (CCW(w1, w2, w3) != CCW(w1, w2, w4)));
+	}
+
+	// Determine whether the 3 points are counter clockwise
+	private boolean CCW(Waypoint w1, Waypoint w2, Waypoint w3)
+	{
+		int a = w1.getX(); int b = w1.getY();
+		int c = w2.getX(); int d = w2.getY();
+		int e = w3.getX(); int f = w3.getY();
+
+		return ((f-b)*(c-a)>(d-b)*(e-a));
+	}
 }
