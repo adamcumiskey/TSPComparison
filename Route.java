@@ -23,6 +23,13 @@ public class Route
 			route.add(Waypoint.randomWaypoint());
 		}
 	}
+		
+	public Route copy()
+	{
+		Route routeCopy = new Route(0);
+		routeCopy.setRoute(route);
+		return routeCopy;
+	}
 
 	public void setRoute(ArrayList<Waypoint> newRoute)
 	{
