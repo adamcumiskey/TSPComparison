@@ -18,9 +18,9 @@ public class Waypoint
 		this.y = y;
 	}
 
-	public void print()
+	public String toString()
 	{
-		System.out.println("(" + x + ", " + y + ")");
+		return "(" + x + ", " + y + ")";
 	}
 
 	public int getX()

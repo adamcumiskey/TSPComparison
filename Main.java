@@ -39,7 +39,17 @@ public class Main
 		float finalLength = routeCopy.getLength();
 		float lengthImprovement = (1.0f - (finalLength / initialLength)) * 100.0f;
 
-		printTrialResults(algorithm.name(), initialLength, finalLength, runTime);
+		String name;
+		if (useImprovement == true)
+		{
+			name = algorithm.name() + " Improved";
+		}
+		else
+		{
+			name = algorithm.name();
+		}
+
+		printTrialResults(name, initialLength, finalLength, runTime);
 
 		// Store results in a dictionary and return the values
 		Hashtable results = new Hashtable();
@@ -57,10 +67,11 @@ public class Main
 	{
 		System.out.println();
 		System.out.println("========================================");
-		System.out.println("              " + name);
+		System.out.println(name);
 		System.out.println("========================================");
 		System.out.println("Average Improvement: " + reduction + "%");
 		System.out.println("Average Time: " + time + "s");
+		System.out.println();
 	}
 
 	private static void printTrialResults(String name, float initialLength, float finalLength, float time)
@@ -74,6 +85,8 @@ public class Main
 
 	public static void main(String[] args) throws CloneNotSupportedException
 	{
+		System.out.println();
+
 		// Get the number of waypoints from the user
 		Scanner scanner = new Scanner(System.in);
 		
@@ -87,11 +100,15 @@ public class Main
 		Greedy2OptTSP greedy2Opt = new Greedy2OptTSP();
 		float reduc2Opt = 0.0f;
 		float time2Opt = 0.0f;
+		float reduc2OptImproved = 0.0f;
+		float time2OptImproved = 0.0f;
 
 		Greedy3OptTSP greedy3Opt = new Greedy3OptTSP();
 		float reduc3Opt = 0.0f;
 		float time3Opt = 0.0f;
-	
+		float reduc3OptImproved = 0.0f;
+		float time3OptImproved = 0.0f;	
+
 		for (int i = 0; i < m; ++i)
 		{
 			System.out.println("Trial " + (i+1));
@@ -101,12 +118,22 @@ public class Main
 			reduc2Opt += (float)results2Opt.get(LengthImprovementKey);
 			time2Opt += (float)results2Opt.get(TimeToRunKey);
 
+			Hashtable results2OptImproved = test(route, greedy2Opt, true);
+			reduc2OptImproved += (float)results2OptImproved.get(LengthImprovementKey);
+			time2OptImproved += (float)results2OptImproved.get(TimeToRunKey);
+
 			Hashtable results3Opt = test(route, greedy3Opt, false);
 			reduc3Opt += (float)results3Opt.get(LengthImprovementKey);
 			time3Opt += (float)results3Opt.get(TimeToRunKey);
+			
+			Hashtable results3OptImproved = test(route, greedy3Opt, true);
+			reduc3OptImproved += (float)results3OptImproved.get(LengthImprovementKey);
+			time3OptImproved += (float)results3OptImproved.get(TimeToRunKey);
 		}
-
 		printAverageResults(greedy2Opt.name(), average(reduc2Opt, m), average(time2Opt, m));
+
+		printAverageResults((greedy2Opt.name() + " Improved"), average(reduc2OptImproved, m), average(time2OptImproved, m));
 		printAverageResults(greedy3Opt.name(), average(reduc3Opt, m), average(time3Opt, m));
+		printAverageResults((greedy3Opt.name() + " Improved"), average(reduc3OptImproved, m), average(time3OptImproved, m));
 	}
 }

@@ -24,13 +24,6 @@ public class Route
 		}
 	}
 		
-	public Route copy()
-	{
-		Route routeCopy = new Route(0);
-		routeCopy.setRoute(route);
-		return routeCopy;
-	}
-
 	public void setRoute(ArrayList<Waypoint> newRoute)
 	{
 		route = newRoute;
@@ -116,7 +109,7 @@ public class Route
 	{
 		for(int i = 0; i < route.size(); ++i)
 		{
-			route.get(i).print();
+			System.out.println(route.get(i).toString());
 		}
 	}	
 

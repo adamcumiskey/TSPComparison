@@ -41,6 +41,19 @@ public class Edge implements Comparable<Edge>
 		}
 	}
 	
+	public boolean sharesVertex(Edge otherEdge)
+	{
+		if (start == otherEdge.start() ||
+				start == otherEdge.end()   ||
+				end   == otherEdge.start() ||
+				end   == otherEdge.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+	
 	public float getLength()
 	{
 		return length;
@@ -53,6 +66,11 @@ public class Edge implements Comparable<Edge>
 
 		length = (float)Math.sqrt((float)Math.pow(delX, 2) +
 						 (float)Math.pow(delY, 2));
+	}
+
+	public String toString()
+	{
+		return "(" + start.toString() + ", " + end.toString() + ")";
 	}
 
 	// Quick way to determine whether two edges intersect

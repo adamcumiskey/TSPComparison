@@ -15,6 +15,9 @@ public class EdgeImprovement
 	{
 		ArrayList<Edge> edges = route.generateEdges(0);
 
+		// For each edge, check against all other valid edges to see if there is overlap
+		// If so, swap the end vertex of the first vertex with the end vertex of the
+		// second.
 		for (int i = 0; i < edges.size(); ++i)
 		{
 			Edge edge = edges.get(i);
@@ -22,7 +25,7 @@ public class EdgeImprovement
 			{
 				Edge testEdge = edges.get(j);
 
-				if (edge != testEdge)
+				if (!edge.sharesVertex(testEdge))
 				{
 					if (edge.isOverlapping(testEdge))
 					{
